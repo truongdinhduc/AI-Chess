@@ -4,8 +4,6 @@ from zmq import DEALER
 import minimax_agent
 import random_agent
 import chess
-import array
-
 WIDTH = HEIGHT = 512
 DIMENSION = 8
 SQ_SIZE = HEIGHT // DIMENSION
@@ -70,19 +68,19 @@ def main():
     screen = p.display.set_mode((WIDTH, HEIGHT))
     board = chess.Board()
     player1 = minimax_agent.MinimaxPlayer(PLAYER)
-    player2 = minimax_agent.MinimaxPlayer(False)
+    player2 = random_agent.RandomPlayer()
     drawboard(screen)
     loadImage()
     while not board.is_game_over():
         if board.turn == player1.player:
-            move = player1.get_move(board, 5)
+            move = player1.get_move(board, 2)
             board.push(move)
         else:
-            move = player2.get_move(board, 3)
+            move = player2.get_move(board)
             board.push(move)
         drawpiece(screen, convert_to_int(board))
         p.display.flip()
-        sleep(0.5)
+        sleep(0.1)
     print(board.result())
 
 
