@@ -35,7 +35,7 @@ class MinimaxPlayer:
             return board_evaluation(board)
 
         if player:
-            best = -10000
+            best = -100000
             for move in list(board.legal_moves):
                 board.push(move)
                 best = max(best, self.minimax(
@@ -47,7 +47,7 @@ class MinimaxPlayer:
                     return best
             return best
         else:
-            best = 10000
+            best = 100000
             for move in list(board.legal_moves):
                 board.push(move)
                 best = min(best, self.minimax(
@@ -60,11 +60,11 @@ class MinimaxPlayer:
             return best
 
     def get_move(self, board, depth):
-        best = -10000
+        best = -100000
         best_move = None
         for move in list(board.legal_moves):
             board.push(move)
-            move_value = self.minimax(board, depth, -10000, 10000, self.player)
+            move_value = self.minimax(board, depth, -100000, 100000, self.player)
             if move_value > best:
                 best = move_value
                 best_move = move
